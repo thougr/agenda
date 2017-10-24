@@ -56,6 +56,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 2. login（用户登录）
 
  - agenda login -u [UserName] -p [PassWord]
@@ -75,6 +76,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 3. logout（当前用户登出）
 
  - agenda logout 
@@ -94,6 +96,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 4. queryU（查看已注册的所有用户的用户名、邮箱及电话信息）
 
  - agenda queryU
@@ -110,6 +113,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 5. delete（删除本用户）
 
  - agenda delete 
@@ -128,6 +132,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 6. create（创建会议）
 
  - agenda create -t [Title] -p [Participator] -s [StartTime] -e [EndTime] 
@@ -149,6 +154,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 7. add（添加会议参与者）
 
  - agenda add -p [Participator] -t [Title]
@@ -167,6 +173,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 8. remove（从某会议删除某参与者）
 
  - agenda remove -p [Participator] -t [Title]
@@ -185,6 +192,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 9. queryM（查询会议）
 
  - agenda queryM -t [StartTime] -e [EndTime] 
@@ -201,6 +209,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 10. deleteM（根据会议名删除会议）
 
  - agenda delete -t [title]
@@ -217,6 +226,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 ```
+
 11. quit（当前用户退出会议）
 
  - agenda quit -t [title]
