@@ -20,28 +20,28 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AddParticipatorCmd represents the AddParticipator command
-var AddParticipatorCmd = &cobra.Command{
-	Use:   "add -p [Participator] -t [Title]",
-	Short: "To add Participator of the meeting",
-	Long: `Add [Participator] to the meeting with the title of [Title]:
+// UserDeleteCmd represents the UserDelete command
+var UserDeleteCmd = &cobra.Command{
+	Use:   "delete",
+	Short: "To delete your account in Agenda",
+	Long: `you can delete your account in the database of Agenda:
 
-attention:If the Participator cannot attend during the time, add fail.`,
+attention:After deleting,you will need to register a new User to login Agenda.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("AddParticipator called")
+		fmt.Println("UserDelete called")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(AddParticipatorCmd)
+	RootCmd.AddCommand(UserDeleteCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// AddParticipatorCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// UserDeleteCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// AddParticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// UserDeleteCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

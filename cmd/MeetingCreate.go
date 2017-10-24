@@ -20,28 +20,31 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AddParticipatorCmd represents the AddParticipator command
-var AddParticipatorCmd = &cobra.Command{
-	Use:   "add -p [Participator] -t [Title]",
-	Short: "To add Participator of the meeting",
-	Long: `Add [Participator] to the meeting with the title of [Title]:
+// MeetingCreateCmd represents the MeetingCreate command
+var MeetingCreateCmd = &cobra.Command{
+	Use:   "create -t [Title] -p [Participator] -s [StartTime] -e [EndTime]",
+	Short: "To create a new meeting",
+	Long: `To create a new meeting with:
 
-attention:If the Participator cannot attend during the time, add fail.`,
+[Title] the Title of the meeting
+[Participator] the Participator of the meeting,the Participator can only attend one meeting during one meeting time
+[StartTime] the StartTime of the meeting
+[EndTime] the EndTime of the meeting`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("AddParticipator called")
+		fmt.Println("MeetingCreate called")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(AddParticipatorCmd)
+	RootCmd.AddCommand(MeetingCreateCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// AddParticipatorCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// MeetingCreateCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// AddParticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// MeetingCreateCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

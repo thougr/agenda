@@ -20,28 +20,34 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AddParticipatorCmd represents the AddParticipator command
-var AddParticipatorCmd = &cobra.Command{
-	Use:   "add -p [Participator] -t [Title]",
-	Short: "To add Participator of the meeting",
-	Long: `Add [Participator] to the meeting with the title of [Title]:
+/*注册新用户时，用户需设置一个唯一的用户名和一个密码。另外，还需登记邮箱及电话信息。
+如果注册时提供的用户名已由其他用户使用，应反馈一个适当的出错信息；
+成功注册后，亦应反馈一个成功注册的信息。*/
+// UserRegisterCmd represents the UserRegister command
+var UserRegisterCmd = &cobra.Command{
+	Use:   "register -u [UserName] -p [Pass] -e [Email] -t [Phone]",
+	Short: "Register a new user",
+	Long: `Input command register -u UserName -p PassWord -e Email -t Phone:
 
-attention:If the Participator cannot attend during the time, add fail.`,
+[Username] is the name of the new register
+[PassWord] is the password to login
+[Email]is the email address of the register
+[Phone] is the phone of the register`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("AddParticipator called")
+		fmt.Println("UserRegister called")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(AddParticipatorCmd)
+	RootCmd.AddCommand(UserRegisterCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// AddParticipatorCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// UserRegisterCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// AddParticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// UserRegisterCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

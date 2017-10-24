@@ -20,28 +20,29 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AddParticipatorCmd represents the AddParticipator command
-var AddParticipatorCmd = &cobra.Command{
-	Use:   "add -p [Participator] -t [Title]",
-	Short: "To add Participator of the meeting",
-	Long: `Add [Participator] to the meeting with the title of [Title]:
+// UserLogoutCmd represents the UserLogout command
+var UserLogoutCmd = &cobra.Command{
+	Use:   "logout",
+	Short: "To logout Agenda",
+	Long: `After logouting,you can only register or login:
 
-attention:If the Participator cannot attend during the time, add fail.`,
+register -u [UserName] -p [Pass] -e [Email]
+login -u [UserName] -p [PassWord]`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("AddParticipator called")
+		fmt.Println("UserLogout called")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(AddParticipatorCmd)
+	RootCmd.AddCommand(UserLogoutCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// AddParticipatorCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// UserLogoutCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// AddParticipatorCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// UserLogoutCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
