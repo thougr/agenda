@@ -63,7 +63,7 @@ Flags:
 Use "agenda [command] --help" for more information about a command.
 
 ```
-各个命令的用法和功能：<\br>
+各个命令的用法和功能：</br>
 add
 ```
 /agenda$ ./agenda add -h
