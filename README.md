@@ -63,8 +63,8 @@ Flags:
 Use "agenda [command] --help" for more information about a command.
 
 ```
-###各个命令的用法和功能：
-###add
+各个命令的用法和功能：<\br>
+add
 ```
 /agenda$ ./agenda add -h
 Add [Participator] to the meeting with the title of [Title]:
@@ -81,7 +81,7 @@ Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
 ```
-###create
+create
 ```
  ./agenda create -h
 To create a new meeting with:
@@ -101,7 +101,7 @@ Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
 ```
-###delete
+delete
 ```
 ./agenda delete -h
 you can delete your account in the database of Agenda:
@@ -118,7 +118,7 @@ Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
 ```
-###deleteM
+deleteM
 ```
 ./agenda deleteM -h
 you can delete one meeting with the title [title]
@@ -134,7 +134,7 @@ Global Flags:
 
 
 ```
-###login
+login
 ```
 ./agenda login -h
 Using UserName and PassWord to login Agenda:
@@ -152,7 +152,7 @@ Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
 ```
-###logout
+logout
 ```
  ./agenda logout -h
 After logouting,you can only register or login:
@@ -170,7 +170,7 @@ Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
 ```
-###queryM
+queryM
 ```
 ./agenda queryM -h
 You can query all the meeting have attended during [StartTime] and [EndTime]
@@ -186,7 +186,7 @@ Global Flags:
 
 
 ```
-###queryU
+queryU
 ```
  ./agenda queryU -h
 You can query all the users's names who have registed.
@@ -201,7 +201,7 @@ Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
 ```
-###quit
+quit
 ```
 ./agenda quit -h
 you can quit the meeting with the title of [title]:
@@ -219,7 +219,7 @@ Global Flags:
 
 
 ```
-###register
+register
 ```
 ./agenda register -h
 Input command register -u UserName -p PassWord -e Email -t Phone:
@@ -241,7 +241,7 @@ Global Flags:
 
 
 ```
-###remove
+remove
 ```
  ./agenda remove -h
 remove [Participator] from the meeting with the title of [Title]:
