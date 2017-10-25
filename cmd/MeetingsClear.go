@@ -23,7 +23,7 @@ import (
 // MeetingsClearCmd represents the MeetingsClear command
 var MeetingsClearCmd = &cobra.Command{
 	Use:   "clear",
-	Short: "clear all the meeting",
+	Short: "clear all the meeting created by the current user",
 	Long: `you can clear all the meeting you have created`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("MeetingsClear called")

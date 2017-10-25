@@ -262,6 +262,7 @@ Flags:
 Global Flags:
       --config string   config file (default is $HOME/.agenda.yaml)
 
+
 ```
 
 
