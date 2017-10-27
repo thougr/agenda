@@ -7,6 +7,13 @@ import (
 	"encoding/json"
 )
 
+import (
+	"os"
+	"io"
+	"fmt"
+	"encoding/json"
+)
+
 var userlist []User
 var meetinglist []Meeting
 var CurrentUser User
@@ -33,7 +40,7 @@ func readCurrentUser()  {
 	}
 	file1.Close()
 }
-func readFromFile()  {
+func readFromFile() {
 	//读user
 	file1, err1 := os.Open("UserInfo");
 	if err1 != nil {
