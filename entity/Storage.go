@@ -9,12 +9,30 @@ import (
 
 var userlist []User
 var meetinglist []Meeting
+var CurrentUser User
 
 type uFilter func (*User) bool
 type uSwitcher func (*User) 
 type mFilter func (*Meeting) bool
 type mSwitcher func (*Meeting) 
 
+func readCurrentUser()  {
+	file1, err1 := os.Open("CurUser");
+	if err1 != nil {
+		fmt.Fprintf(os.Stderr, "Fail to open CurUser")
+	}
+	dec1 := json.NewDecoder(file1)
+	for {
+		err1 := dec1.Decode(&CurrentUser)	
+		if err1 == io.EOF {
+			fmt.Println("CurrentUser读取完成")
+			break
+		} else if err1 != nil {
+			fmt.Fprintf(os.Stderr, "Fail to Decode")
+		}
+	}
+	file1.Close()
+}
 func readFromFile()  {
 	//读user
 	file1, err1 := os.Open("UserInfo");
@@ -73,7 +91,17 @@ func writeToFile()  {
 	}
 	file2.Close()
 }
-
+func writeCurrentUser()  {
+	file1, err1 := os.Create("CurUser");
+	if err1 != nil {
+		fmt.Fprintf(os.Stderr, "Fail to create CurUser")		
+	}
+	enc1 := json.NewEncoder(file1)	
+	if err1 := enc1.Encode(&CurrentUser); err1 != nil {
+		fmt.Fprintf(os.Stderr, "Fail to encode")
+	}
+	file1.Close()
+}
 func createUser(t_user User) {
 	userlist = append(userlist,t_user)
 }
