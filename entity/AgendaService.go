@@ -3,27 +3,6 @@ package main
 import (
 	"fmt"
 )
-type User struct {
-	Name     string
-	Password string
-	Email    string
-	Phone    string
-}
-type Meeting struct {
-	Sponsor       string
-	StartDate     string
-	EndDate       string
-	Title         string
-	Participators []User
-}
-var userlist []User
-var meetinglist []Meeting
-var CurrentUser User
-
-type uFilter func (*User) bool
-type uSwitcher func (*User) 
-type mFilter func (*Meeting) bool
-type mSwitcher func (*Meeting) 
 
 func StartAgenda() bool {
 	readCurrentUser()
