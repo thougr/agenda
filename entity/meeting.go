@@ -5,10 +5,10 @@ type Meeting struct {
 	StartDate     string
 	EndDate       string
 	Title         string
-	Participators []User
+	Participators []string
 }
 
-func (m *Meeting) initMeeting(t_sponsor, t_startDate, t_endDate, t_title string, t_participator []User) {
+func (m *Meeting) initMeeting(t_sponsor, t_startDate, t_endDate, t_title string, t_participator []string) {
 	m.Sponsor = t_sponsor
 	m.StartDate = t_startDate
 	m.EndDate = t_endDate
@@ -25,11 +25,11 @@ func (m *Meeting) setSponsor(s string) {
 	m.Sponsor = s
 }
 
-func (m Meeting) getParticipators() []User {
+func (m Meeting) getParticipators() []string {
 	return m.Participators
 }
 
-func (m *Meeting) setParticipators(p []User) {
+func (m *Meeting) setParticipators(p []string) {
 	m.Participators = p
 }
 func (m Meeting) getStartDate() string {
@@ -56,7 +56,7 @@ func (m *Meeting) setTitle(t string) {
 
 func (m Meeting) isParticipator(name string) bool {
 	for _, t := range m.Participators {
-		if t.Name == name {
+		if t == name {
 			return true
 		}
 	}
