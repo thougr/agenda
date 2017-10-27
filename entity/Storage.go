@@ -1,4 +1,4 @@
-package entity
+package main
 
 import (
 	"os"
@@ -11,9 +11,9 @@ var userlist []User
 var meetinglist []Meeting
 
 type uFilter func (*User) bool
-type uSwitcher func (*User) 
+type uSwitcher func (*User)
 type mFilter func (*Meeting) bool
-type mSwitcher func (*Meeting) 
+type mSwitcher func (*Meeting)
 
 func readFromFile()  {
 	//读user
@@ -23,7 +23,7 @@ func readFromFile()  {
 	}
 	dec1 := json.NewDecoder(file1)
 	for {
-		err1 := dec1.Decode(&userlist)	
+		err1 := dec1.Decode(&userlist)
 		if err1 == io.EOF {
 			fmt.Println("User读取完成")
 			break
@@ -40,7 +40,7 @@ func readFromFile()  {
 	}
 	dec2 := json.NewDecoder(file2)
 	for {
-		err2 := dec2.Decode(&meetinglist)	
+		err2 := dec2.Decode(&meetinglist)
 		if err2 == io.EOF {
 			fmt.Println("Meeting读取完成")
 			break
@@ -55,9 +55,9 @@ func writeToFile()  {
 	//写User
 	file1, err1 := os.Create("UserInfo");
 	if err1 != nil {
-		fmt.Fprintf(os.Stderr, "Fail to create UserInfo")		
+		fmt.Fprintf(os.Stderr, "Fail to create UserInfo")
 	}
-	enc1 := json.NewEncoder(file1)	
+	enc1 := json.NewEncoder(file1)
 	if err1 := enc1.Encode(&userlist); err1 != nil {
 		fmt.Fprintf(os.Stderr, "Fail to encode")
 	}
@@ -65,9 +65,9 @@ func writeToFile()  {
 	//写Meeting
 	file2, err2 := os.Create("MeetingInfo");
 	if err2 != nil {
-		fmt.Fprintf(os.Stderr, "Fail to create MeetingInfo")		
+		fmt.Fprintf(os.Stderr, "Fail to create MeetingInfo")
 	}
-	enc2 := json.NewEncoder(file2)	
+	enc2 := json.NewEncoder(file2)
 	if err2 := enc2.Encode(&meetinglist); err2 != nil {
 		fmt.Fprintf(os.Stderr, "Fail to encode")
 	}
@@ -145,6 +145,3 @@ func deleteMeeting(filter mFilter) int {
 	}
 	return n
 }
-
-
-
