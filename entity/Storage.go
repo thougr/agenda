@@ -132,11 +132,11 @@ func deleteUser(filter uFilter) int {
 	n := 0
 	for i, u := range userlist {
 		if filter(&u) {
-			userlist[i] = userlist[len(userlist) - 1]
-			userlist = userlist[:len(userlist) - 1]
+			userlist[i] = userlist[len(userlist) - 1 - n]			
 			n++
 		}
 	}
+	userlist = userlist[:len(userlist)  - n]
 	return n
 }
 func queryMeeting(filter mFilter) []Meeting {
@@ -164,11 +164,11 @@ func deleteMeeting(filter mFilter) int {
 	n := 0
 	for i, m := range meetinglist {
 		if filter(&m) {
-			meetinglist[i] = meetinglist[len(meetinglist) - 1]
-			meetinglist = meetinglist[:len(meetinglist) - 1]
+			meetinglist[i] = meetinglist[len(meetinglist) - 1 - n]
 			n++
 		}
 	}
+	meetinglist = meetinglist[:len(meetinglist) - n]
 	return n
 }
 
