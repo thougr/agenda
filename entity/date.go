@@ -1,4 +1,4 @@
-package main
+package entity
 
 import (
 	"fmt"
@@ -90,7 +90,7 @@ func stringToInt(s string) int {
 	}
 	return result
 }
-
+//"0000-00-00/00:00"
 func stringToDate(t_dateString string) Date {
 	var i int
 	var x Date

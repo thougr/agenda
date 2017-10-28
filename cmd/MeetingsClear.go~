@@ -48,7 +48,7 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// MeetingsClearCmd.PersistentFlags().String("foo", "", "A help for foo")
-MeetingsClearCmd.Flags().StringP("username", "u", "", "new user's username")
+
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// MeetingsClearCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")

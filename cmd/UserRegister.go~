@@ -20,6 +20,7 @@ import (
 	"os"
   "agenda/entity"
 	"github.com/spf13/cobra"
+  //"github.com/spf13/pflag"
 )
 
 /*注册新用户时，用户需设置一个唯一的用户名和一个密码。另外，还需登记邮箱及电话信息。
