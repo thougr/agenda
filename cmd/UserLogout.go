@@ -16,7 +16,8 @@ package cmd
 
 import (
 	"fmt"
-
+	"log"
+  	"agenda/entity"
 	"github.com/spf13/cobra"
 )
 
@@ -26,11 +27,21 @@ var UserLogoutCmd = &cobra.Command{
 	Short: "To logout Agenda",
 	Long: `After logouting,you can only register or login:
 
-register -u [UserName] -p [Pass] -e [Email]
-login -u [UserName] -p [PassWord]`,
+	register -u [UserName] -p [Pass] -e [Email]
+	login -u [UserName] -p [PassWord]`,
+	
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("UserLogout called")
+		entity.StartAgenda()
+		
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		entity.CurrentUser.InitUser("", "", "", "")
+
+		debugLog.Println("Log out successfully")
+		fmt.Println("Log out successfully")
+		entity.QuitAgenda()
 	},
+
+	
 }
 
 func init() {

@@ -15,8 +15,9 @@
 package cmd
 
 import (
+	"agenda/entity"
 	"fmt"
-
+	"log"
 	"github.com/spf13/cobra"
 )
 
@@ -26,13 +27,27 @@ var MeetingDeleteCmd = &cobra.Command{
 	Short: "delete meeting with the title [title]",
 	Long:  `you can delete one meeting with the title [title]`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("MeetingDelete called")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.StartAgenda() == false {
+			debugLog.Println("Fail, please log in")
+			fmt.Println("Fail, please log in")
+		}
+		arg_t, _ := cmd.Flags().GetString("Title")
+
+		if entity.DeleteMeeting(entity.CurrentUser.Name, arg_t) {
+			debugLog.Println("Delete meeting successfully")
+			fmt.Println("Delete meeting successfully")
+		} else {
+			debugLog.Println("Fail to delete meeting")
+			fmt.Println("Fail to delete meeting")
+		}
+		entity.QuitAgenda()
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(MeetingDeleteCmd)
-
+	MeetingDeleteCmd.Flags().StringP("Title", "t", "", "meeting title")	
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

@@ -15,8 +15,9 @@
 package cmd
 
 import (
+	"agenda/entity"
 	"fmt"
-
+	"log"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +27,21 @@ var MeetingsClearCmd = &cobra.Command{
 	Short: "clear all the meeting created by the current user",
 	Long: `you can clear all the meeting you have created`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("MeetingsClear called")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.StartAgenda() == false {
+			debugLog.Println("Fail, please log in")
+			fmt.Println("Fail, please log in")
+		}
+
+		if entity.DeleteAllMeetings(entity.CurrentUser.Name) {
+			debugLog.Println("Clear meeting successfully")
+			fmt.Println("Clear meeting successfully")
+			
+		} else {
+			debugLog.Println("Fail to clear meeting")
+			fmt.Println("Fail to clear meeting")
+		}
+		entity.QuitAgenda()
 	},
 }
 
@@ -38,7 +53,7 @@ func init() {
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// MeetingsClearCmd.PersistentFlags().String("foo", "", "A help for foo")
-
+MeetingsClearCmd.Flags().StringP("username", "u", "", "new user's username")
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// MeetingsClearCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")

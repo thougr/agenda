@@ -1,4 +1,4 @@
-package main
+package entity
 
 import (
 	"os"
@@ -17,7 +17,7 @@ type uSwitcher func (*User)
 type mFilter func (*Meeting) bool
 type mSwitcher func (*Meeting) 
 
-func readCurrentUser()  {
+func ReadCurrentUser()  {
 	file1, err1 := os.Open("CurUser");
 	if err1 != nil {
 		fmt.Fprintf(os.Stderr, "Fail to open CurUser")
@@ -30,7 +30,7 @@ func readCurrentUser()  {
 	file1.Close()
 }
 
-func readFromFile() {
+func ReadFromFile() {
 	//读user
 	file1, err1 := os.Open("UserInfo");
 	if err1 != nil {

@@ -1,4 +1,4 @@
-package main
+package entity
 
 type User struct {
 	Name     string
@@ -7,7 +7,7 @@ type User struct {
 	Phone    string
 }
 
-func (m *User) initUser(t_userName, t_userPassword, t_userEmail, t_userPhone string) {
+func (m *User) InitUser(t_userName, t_userPassword, t_userEmail, t_userPhone string) {
 	m.Name = t_userName
 	m.Password = t_userPassword
 	m.Email = t_userEmail

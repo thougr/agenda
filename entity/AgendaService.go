@@ -1,14 +1,15 @@
-package main
+package entity
 
 import (
 	"fmt"
 )
+
+
 //不要在login后调用StartAgenda
 func StartAgenda() bool {
-	readFromFile()
-	readCurrentUser()
+	ReadFromFile()
+	ReadCurrentUser()
 	if CurrentUser.Name == "" {
-		fmt.Println("尚未登录")
 		return false
 	}
 	return true
@@ -27,7 +28,10 @@ func QuitAgenda() {
 */
 //登录命令不需要调用StartAgenda,但需要调用QuitAgenda来保存登录信息
 func UserLogIn(userName string, password string) bool{
-		readFromFile()
+		ReadFromFile()
+		if (CurrentUser.Name != "") {
+			return false
+		}
 		filter := func(u *User) bool {
 		  return u.getName() == userName && u.getPassword() == password
 		}
@@ -80,7 +84,7 @@ func DeleteUser(userName string, password string) bool {
 	if (deleteUser(uf) != 0) {
 		deleteMeeting(mf)
 		if (userName == CurrentUser.Name) {
-			CurrentUser.initUser("", "", "", "")
+			CurrentUser.InitUser("", "", "", "")
 		}
 		return true
 	} else {
@@ -241,6 +245,7 @@ func MeetingQuery(sponsor, startDate, endDate string) []Meeting {
 	sd := stringToDate(startDate)
 	ed := stringToDate(endDate)
 	if (sd.isMoreThan(ed) || !sd.isValid() || !ed.isValid()) {
+		fmt.Println("日期不合法")
 		return ttt //此时a为空
 	}
 
@@ -318,23 +323,3 @@ func DeleteAllMeetings(name string) bool {
 	return deleteMeeting(filter) > 0
 }
 
-func main() {
-	//fmt.Println(UserLogIn("1","456"))
-	StartAgenda()
-	//UserRegister("1","456","a","b")
-	//UserRegister("2","456","c","d")
-	//UserRegister("3","456","e","f")
-	
-	fmt.Println(meetinglist)
-	/*
-	CreateMeeting("2","fffs","2010-06-19/00:00","2010-06-21/00:00",[]string{"3"})
-	CreateMeeting("1","asf","2011-06-19/00:00","2012-06-21/00:00",[]string{"3","2"})
-	CreateMeeting("3","eee","2000-06-19/00:00","2001-06-21/00:00",[]string{"1","2"})
-	*/
-	//fmt.Println(CreateMeeting("2","fffs","2010-06-19/00:00","2010-06-21/00:00",[]string{"3"}))
-	
-	fmt.Println("CurrentUser is ",CurrentUser)
-	
-		
-	QuitAgenda()
-}

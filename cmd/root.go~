@@ -17,7 +17,7 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"log"
+
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -36,14 +36,10 @@ var RootCmd = &cobra.Command{
 
     PersistentPreRun: func(cmd *cobra.Command, args []string) {
       logFile, _ = os.OpenFile(logFileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-	  debugLog := log.New(logFile,"[Execute]", log.Ldate|log.Ltime|log.Lshortfile)
-	  debugLog.Printf("%v\n", os.Args[1:])
-	},
+    },
     PersistentPostRun: func(cmd *cobra.Command, args []string) {
-	  logFile.Sync()
       logFile.Close()
-	},
-
+    },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

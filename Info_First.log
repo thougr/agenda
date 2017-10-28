@@ -1,0 +1,93 @@
+[Execute]2017/10/28 23:51:15 root.go:40: [register -u 31 -p 456 -e 44 -t 32132]
+[Result]2017/10/28 23:51:15 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/29 00:17:32 root.go:40: [login -u 2 -p 456]
+[Execute]2017/10/29 00:17:32 UserLogin.go:35: [login -u 2 -p 456]
+[Result]2017/10/29 00:17:32 UserLogin.go:44: Log in successfully
+[Execute]2017/10/29 00:17:54 root.go:40: [login -u 3 -p 456]
+[Execute]2017/10/29 00:17:54 UserLogin.go:35: [login -u 3 -p 456]
+[Result]2017/10/29 00:17:54 UserLogin.go:44: Log in successfully
+[Execute]2017/10/29 00:23:21 root.go:40: [login -u 3 -p 456]
+[Execute]2017/10/29 00:23:21 UserLogin.go:35: [login -u 3 -p 456]
+[Result]2017/10/29 00:23:21 UserLogin.go:48: Fail to log in
+[Execute]2017/10/29 00:23:33 root.go:40: [login -u 2 -p 456]
+[Execute]2017/10/29 00:23:33 UserLogin.go:35: [login -u 2 -p 456]
+[Result]2017/10/29 00:23:33 UserLogin.go:48: Fail to log in
+[Execute]2017/10/29 00:26:58 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:26:58 MeetingCreate.go:37: Fail,please log in
+[Result]2017/10/29 00:26:58 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 00:28:30 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:28:30 MeetingCreate.go:37: Fail, please log in
+[Result]2017/10/29 00:28:30 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 00:30:33 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:30:33 MeetingCreate.go:37: Fail, please log in
+[Result]2017/10/29 00:30:33 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 00:31:15 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:31:15 MeetingCreate.go:37: Fail, please log in
+[Result]2017/10/29 00:31:15 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 00:31:34 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:31:34 MeetingCreate.go:37: Fail, please log in
+[Result]2017/10/29 00:31:34 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 00:32:01 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:32:01 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 00:32:41 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:32:41 MeetingCreate.go:49: Fail to create meeting
+[Execute]2017/10/29 00:41:15 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1999-12-12/12:13]
+[Result]2017/10/29 00:41:15 MeetingCreate.go:46: Create meeting successfully
+[Execute]2017/10/29 00:43:59 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1987-12-12/12:13]
+[Result]2017/10/29 00:43:59 MeetingCreate.go:49: Fail to create meeting
+[Execute]2017/10/29 00:48:51 root.go:40: [deleteM -t wqww]
+[Result]2017/10/29 00:48:51 MeetingDelete.go:38: Delete meeting successfully
+[Execute]2017/10/29 00:48:56 root.go:40: [deleteM -t wqww]
+[Result]2017/10/29 00:48:56 MeetingDelete.go:41: Fail to delete meeting
+[Execute]2017/10/29 00:59:56 root.go:40: [create -t wqww -p 2 -p 123 -s 1999-12-12/12:12 -e 1987-12-12/12:13]
+[Result]2017/10/29 00:59:56 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 01:00:13 root.go:40: [create -t wqww -p 2 -p 123 -s 2999-12-12/12:12 -e -12-12/12:13]
+[Result]2017/10/29 01:00:13 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 01:00:18 root.go:40: [create -t wqww -p 2 -p 123 -s 2999-12-12/12:12 -e 3000-12-12/12:13]
+[Result]2017/10/29 01:00:18 MeetingCreate.go:45: Create meeting successfully
+[Execute]2017/10/29 01:02:05 root.go:40: [queryM -s 0999-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:02:05 MeetingQuery.go:47: Fail to query meeting
+[Execute]2017/10/29 01:02:47 root.go:40: [queryM -s 1000-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:02:47 MeetingQuery.go:40: Query meeting successfully
+[Execute]2017/10/29 01:03:23 root.go:40: [create -t wqww -p 2 -p 123 -s 2999-12-12/12:12 -e 3000-12-12/12:13]
+[Result]2017/10/29 01:03:23 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 01:03:30 root.go:40: [create -t qqqw -p 2 -p 123 -s 2999-12-12/12:12 -e 3000-12-12/12:13]
+[Result]2017/10/29 01:03:30 MeetingCreate.go:48: Fail to create meeting
+[Execute]2017/10/29 01:03:57 root.go:40: [create -t qqqw -p 2 -p 123 -s 2997-12-12/12:12 -e 2998-12-12/12:13]
+[Result]2017/10/29 01:03:57 MeetingCreate.go:45: Create meeting successfully
+[Execute]2017/10/29 01:04:02 root.go:40: [queryM -s 1000-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:04:02 MeetingQuery.go:40: Query meeting successfully
+[Execute]2017/10/29 01:05:27 root.go:40: [queryM -s 0000-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:05:27 MeetingQuery.go:47: Fail to query meeting
+[Execute]2017/10/29 01:05:35 root.go:40: [queryM -s 0001-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:05:35 MeetingQuery.go:47: Fail to query meeting
+[Execute]2017/10/29 01:05:39 root.go:40: [queryM -s 1-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:05:39 MeetingQuery.go:47: Fail to query meeting
+[Execute]2017/10/29 01:06:13 root.go:40: [queryM -s 1-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:06:13 MeetingQuery.go:47: Fail to query meeting
+[Execute]2017/10/29 01:06:26 root.go:40: [queryM -s 0001-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:06:26 MeetingQuery.go:47: Fail to query meeting
+[Execute]2017/10/29 01:07:33 root.go:40: [queryM -s 1000-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:07:33 MeetingQuery.go:40: Query meeting successfully
+[Execute]2017/10/29 01:12:43 root.go:40: [clear]
+[Result]2017/10/29 01:12:43 MeetingsClear.go:37: Clear meeting successfully
+[Execute]2017/10/29 01:12:49 root.go:40: [clear]
+[Result]2017/10/29 01:12:49 MeetingsClear.go:41: Fail to clear meeting
+[Execute]2017/10/29 01:16:16 root.go:40: [delete]
+[Result]2017/10/29 01:16:16 UserDelete.go:39: Delete this account successfully
+[Execute]2017/10/29 01:16:23 root.go:40: [delete]
+[Result]2017/10/29 01:16:23 UserDelete.go:34: Fail, please log in
+[Result]2017/10/29 01:16:23 UserDelete.go:42: Fail to delete this account
+[Execute]2017/10/29 01:17:03 root.go:40: [register -u 3 -p 456 -e 1 -t 1]
+[Result]2017/10/29 01:17:03 UserRegister.go:46: Register new user successfully
+[Execute]2017/10/29 01:17:18 root.go:40: [login -u 3 -p 456]
+[Execute]2017/10/29 01:17:18 UserLogin.go:35: [login -u 3 -p 456]
+[Result]2017/10/29 01:17:18 UserLogin.go:45: Log in successfully
+[Execute]2017/10/29 01:21:11 root.go:40: [queryU]
+[Execute]2017/10/29 01:22:16 root.go:40: [queryU]
+[Execute]2017/10/29 01:22:43 root.go:40: [create -t qqqw -p 2 -p 123 -s 2997-12-12/12:12 -e 2998-12-12/12:13]
+[Result]2017/10/29 01:22:43 MeetingCreate.go:45: Create meeting successfully
+[Execute]2017/10/29 01:23:17 root.go:40: [queryM -s 1000-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:23:17 MeetingQuery.go:40: Query meeting successfully
+[Execute]2017/10/29 01:23:42 root.go:40: [queryM -s 1000-12-12/12:12 -e 3999-12-12/12:12]
+[Result]2017/10/29 01:23:42 MeetingQuery.go:40: Query meeting successfully
