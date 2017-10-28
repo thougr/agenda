@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 )
-
+//不要在login后调用StartAgenda
 func StartAgenda() bool {
 	readFromFile()
 	readCurrentUser()
@@ -319,21 +319,22 @@ func DeleteAllMeetings(name string) bool {
 }
 
 func main() {
-	fmt.Println(UserLogIn("1","456"))
+	//fmt.Println(UserLogIn("1","456"))
 	StartAgenda()
-	/*UserRegister("1","456","a","b")
-	UserRegister("2","456","c","d")
-	UserRegister("3","456","e","f")
-	*/
+	//UserRegister("1","456","a","b")
+	//UserRegister("2","456","c","d")
+	//UserRegister("3","456","e","f")
 	
+	fmt.Println(meetinglist)
+	/*
 	CreateMeeting("2","fffs","2010-06-19/00:00","2010-06-21/00:00",[]string{"3"})
 	CreateMeeting("1","asf","2011-06-19/00:00","2012-06-21/00:00",[]string{"3","2"})
 	CreateMeeting("3","eee","2000-06-19/00:00","2001-06-21/00:00",[]string{"1","2"})
-	
-	//fmt.Println(CreateMeeting("2","fffs","2010-06-19/00:00","2010-06-21/00:00",[]string{"3"}))
-	/*
-	fmt.Println("CurrentUser is ",CurrentUser)
 	*/
+	//fmt.Println(CreateMeeting("2","fffs","2010-06-19/00:00","2010-06-21/00:00",[]string{"3"}))
+	
+	fmt.Println("CurrentUser is ",CurrentUser)
+	
 		
 	QuitAgenda()
 }

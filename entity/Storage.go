@@ -23,16 +23,13 @@ func readCurrentUser()  {
 		fmt.Fprintf(os.Stderr, "Fail to open CurUser")
 	}
 	dec1 := json.NewDecoder(file1)
-	for {
-		err1 := dec1.Decode(&CurrentUser)	
-		if err1 == io.EOF {
-			break
-		} else if err1 != nil {
-			fmt.Fprintf(os.Stderr, "Fail to Decode")
-		}
-	}
+	err1 = dec1.Decode(&CurrentUser)	
+	if err1 != io.EOF && err1 != nil {
+		fmt.Fprintf(os.Stderr, "Fail to Decode")
+	} 
 	file1.Close()
 }
+
 func readFromFile() {
 	//读user
 	file1, err1 := os.Open("UserInfo");
@@ -40,13 +37,9 @@ func readFromFile() {
 		fmt.Fprintf(os.Stderr, "Fail to open UserInfo")
 	}
 	dec1 := json.NewDecoder(file1)
-	for {
-		err1 := dec1.Decode(&userlist)	
-		if err1 == io.EOF {
-			break
-		} else if err1 != nil {
-			fmt.Fprintf(os.Stderr, "Fail to Decode")
-		}
+	err1 = dec1.Decode(&userlist)	
+	if err1 != io.EOF && err1 != nil {
+		fmt.Fprintf(os.Stderr, "Fail to Decode")
 	}
 	file1.Close()
 
@@ -56,14 +49,10 @@ func readFromFile() {
 		fmt.Fprintf(os.Stderr, "Fail to open MeetingInfo")
 	}
 	dec2 := json.NewDecoder(file2)
-	for {
-		err2 := dec2.Decode(&meetinglist)	
-		if err2 == io.EOF {
-			break
-		} else if err2 != nil {
-			fmt.Fprintf(os.Stderr, "Fail to Decode")
-		}
-	}
+	err2 = dec2.Decode(&meetinglist)	
+	if err2 != io.EOF && err2 != nil{
+		fmt.Fprintf(os.Stderr, "Fail to Decode")
+	} 
 	file2.Close()
 }
 
