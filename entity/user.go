@@ -1,4 +1,4 @@
-package entity
+package main
 
 type User struct {
 	Name     string

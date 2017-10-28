@@ -5,11 +5,12 @@ import (
 )
 
 func StartAgenda() bool {
+	readFromFile()
 	readCurrentUser()
-	if CurrentUser.Name != "" {
+	if CurrentUser.Name == "" {
+		fmt.Println("尚未登录")
 		return false
 	}
-	readFromFile()
 	return true
 }
 
@@ -24,16 +25,19 @@ func QuitAgenda() {
 * @param password the password user enter
 * @return if success, true will be returned
 */
+//登录命令不需要调用StartAgenda,但需要调用QuitAgenda来保存登录信息
 func UserLogIn(userName string, password string) bool{
+		readFromFile()
 		filter := func(u *User) bool {
 		  return u.getName() == userName && u.getPassword() == password
 		}
 
 		ulist := queryUser(filter)
-	
 		if (len(ulist) == 0) {
 			return false
 		} else {
+			//当前用户信息
+			CurrentUser = ulist[0]
 			return true
 		}
 	}
@@ -66,7 +70,7 @@ func UserRegister(userName, password, email, phone string) bool {
  * @param password user's password
  * @return if success, true will be returned
  */	
-func DeleteUser(userName string, password string) bool{
+func DeleteUser(userName string, password string) bool {
 	uf := func(u *User) bool {
 		return (u.getName()== userName) && (u.getPassword() == password)
 	}
@@ -75,6 +79,9 @@ func DeleteUser(userName string, password string) bool{
 	}
 	if (deleteUser(uf) != 0) {
 		deleteMeeting(mf)
+		if (userName == CurrentUser.Name) {
+			CurrentUser.initUser("", "", "", "")
+		}
 		return true
 	} else {
 		return false
@@ -108,11 +115,14 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	ed = stringToDate(endDate)
 
 	if ((!sd.isValid()) || (!ed.isValid())) {
+		fmt.Println("日期不合法")
 		return false
 	}
 	if (sd.GreaterOrEqual(ed)) {
+		fmt.Println("开始日期不可大于结束日期")
 		return false
 	}
+	
 	/*-------------------1-------------------------*/
 	uf := func(u *User) bool {
 		return userName == u.getName()
@@ -120,9 +130,10 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 
 	ulist := queryUser(uf)
 	if (len(ulist) == 0) {
+		fmt.Println("发起人未注册")
 		return false
 	}
-
+	
 	/*-------------------2-------------------------*/
 	uf2 := func(u *User) bool {
 		for _, p := range participator {
@@ -133,18 +144,21 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 		return false
 	}
 	ulist2 := queryUser(uf2)
-	if (len(ulist2) == 0) {
+	if (len(ulist2) != len(participator)) {
+		fmt.Println("存在参与者未注册")
 		return false
 	}
-
+	
 	/*-------------------3-------------------------*/
 	uf3 := func(m *Meeting) bool {
 	return title == m.getTitle()
 	}
 	ulist3 := queryMeeting(uf3)
 	if (len(ulist3) != 0) {
+		fmt.Println("会议主题已存在")
 		return false
 	}
+	
 	/*-------------------4--------------------------*/
 	uf4 := func(m *Meeting) bool {
 		if (!(userName == m.getSponsor() || m.isParticipator(userName))) {
@@ -160,9 +174,10 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	}
 	ulist4 := queryMeeting(uf4)
 	if (len(ulist4) != 0) {
+		fmt.Println("与发起人其他会议冲突")
 		return false
 	}
-
+	
 	/*-------------------5--------------------------*/
 	uf5 := func(m *Meeting) bool {
 	for _, p := range participator {
@@ -181,31 +196,36 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	}
 	ulist5 := queryMeeting(uf5)
 	if (len(ulist5) != 0) {
+		fmt.Println("与发起人其他会议冲突")
 		return false
 	}
+	
 	/*-------------------6--------------------------*/
 
 	for i := 0; i < len(participator); i++ {
 		for j := i + 1; j < len(participator); j++ {
 			if (participator[i] == participator[j]) {
+				fmt.Println("参与者不能重复的人")
 				return false
 			}
 		}
 	}
-
-		/*-------------------７--------------------------*/
+	
+	/*-------------------７--------------------------*/
 	for _, p := range participator {
 		if (userName == p) {
+			fmt.Println("参与者不能有发起者")
 			return false
 		}
 	}
 
+	/*-------------------8--------------------------*/
 	if (len(participator) == 0) {
+		fmt.Println("参与者不能为空")
 		return false
 	}
 
-
-	createMeeting(Meeting{userName, startDate, endDate, title, participator})
+	createMeeting(Meeting{userName, title, startDate, endDate, participator})
 	return true
 }
 
@@ -216,7 +236,7 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 * @param endDate time interval's end date
 * @return a meeting list result
 */
-func MeetingQuery(name, startDate, endDate string) []Meeting {
+func MeetingQuery(sponsor, startDate, endDate string) []Meeting {
 	var ttt []Meeting
 	sd := stringToDate(startDate)
 	ed := stringToDate(endDate)
@@ -225,11 +245,11 @@ func MeetingQuery(name, startDate, endDate string) []Meeting {
 	}
 
 	filter := func(a *Meeting) bool {
-		if ((a.Sponsor == name || a.isParticipator(name)) &&
+		if ((a.Sponsor == sponsor || a.isParticipator(sponsor)) &&
 		 (stringToDate(a.getEndDate()).GreaterOrEqual(sd)&&stringToDate(a.getStartDate()).SmallerOrEqual(sd))) {
 			return true
 		}
-		if ((a.Sponsor == name || a.isParticipator(name)) && 
+		if ((a.Sponsor == sponsor || a.isParticipator(sponsor)) && 
 		(stringToDate(a.getStartDate()).SmallerOrEqual(ed)) && stringToDate(a.getStartDate()).GreaterOrEqual(sd)) {
 			return true
 		}
@@ -299,6 +319,22 @@ func DeleteAllMeetings(name string) bool {
 }
 
 func main() {
-	a := "0"
-	fmt.Println(a)
+	StartAgenda()
+	//fmt.Println(UserLogIn("1","456"))	
+	/*
+	UserRegister("1","456","a","b")
+	UserRegister("2","456","c","d")
+	UserRegister("3","456","e","f")
+	*/
+	
+	CreateMeeting("2","fffs","2010-06-19/00:00","2010-06-21/00:00",[]string{"3"})
+	CreateMeeting("1","asf","2011-06-19/00:00","2012-06-21/00:00",[]string{"3","2"})
+	CreateMeeting("3","eee","2000-06-19/00:00","2001-06-21/00:00",[]string{"1","2"})
+	DeleteUser("1","456")
+	//fmt.Println(DeleteAllMeetings("1"))
+	/*
+	fmt.Println("CurrentUser is ",CurrentUser)
+	*/
+		
+	QuitAgenda()
 }

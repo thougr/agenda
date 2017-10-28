@@ -1,4 +1,4 @@
-package entity
+package main
 
 import (
 	"os"
@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"encoding/json"
 )
-
 
 
 var userlist []User
@@ -27,7 +26,6 @@ func readCurrentUser()  {
 	for {
 		err1 := dec1.Decode(&CurrentUser)	
 		if err1 == io.EOF {
-			fmt.Println("CurrentUser读取完成")
 			break
 		} else if err1 != nil {
 			fmt.Fprintf(os.Stderr, "Fail to Decode")
@@ -45,7 +43,6 @@ func readFromFile() {
 	for {
 		err1 := dec1.Decode(&userlist)	
 		if err1 == io.EOF {
-			fmt.Println("User读取完成")
 			break
 		} else if err1 != nil {
 			fmt.Fprintf(os.Stderr, "Fail to Decode")
@@ -62,7 +59,6 @@ func readFromFile() {
 	for {
 		err2 := dec2.Decode(&meetinglist)	
 		if err2 == io.EOF {
-			fmt.Println("Meeting读取完成")
 			break
 		} else if err2 != nil {
 			fmt.Fprintf(os.Stderr, "Fail to Decode")

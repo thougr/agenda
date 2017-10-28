@@ -1,18 +1,19 @@
-package entity
+package main
+
 
 type Meeting struct {
 	Sponsor       string
+	Title         string
 	StartDate     string
 	EndDate       string
-	Title         string
 	Participators []string
 }
 
-func (m *Meeting) initMeeting(t_sponsor, t_startDate, t_endDate, t_title string, t_participator []string) {
+func (m *Meeting) initMeeting(t_sponsor, t_title , t_startDate, t_endDate string,  t_participator []string) {
 	m.Sponsor = t_sponsor
+	m.Title = t_title
 	m.StartDate = t_startDate
 	m.EndDate = t_endDate
-	m.Title = t_title
 	m.Participators = t_participator
 	
 }
@@ -62,3 +63,5 @@ func (m Meeting) isParticipator(name string) bool {
 	}
 	return false	
 }
+
+
