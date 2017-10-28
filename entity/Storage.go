@@ -7,12 +7,7 @@ import (
 	"encoding/json"
 )
 
-import (
-	"os"
-	"io"
-	"fmt"
-	"encoding/json"
-)
+
 
 var userlist []User
 var meetinglist []Meeting

@@ -115,7 +115,7 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	}
 	/*-------------------1-------------------------*/
 	uf := func(u *User) bool {
-		return userName == a.getName()
+		return userName == u.getName()
 	}
 
 	ulist := queryUser(uf)
@@ -124,7 +124,7 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	}
 
 	/*-------------------2-------------------------*/
-	uFilter := func(u *User) bool {
+	uf2 := func(u *User) bool {
 		for _, p := range participator {
 			if p == u.getName() {
 				return true
@@ -169,7 +169,7 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 		if ( !(p == m.getSponsor() || m.isParticipator(p)) ) {
 				return false
 			}
-			if ((p == a.getSponsor() || m.isParticipator(p)) &&
+			if ((p == m.getSponsor() || m.isParticipator(p)) &&
 			(sd.GreaterOrEqual(stringToDate(m.getEndDate())) ||
 			ed.SmallerOrEqual(stringToDate(m.getStartDate())))) {
 				return false
@@ -185,9 +185,9 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	}
 	/*-------------------6--------------------------*/
 
-	for i, p := range participator {
-		for _, pp := range participator[i+1:] {
-			if (p == pp) {
+	for i := 0; i < len(participator); i++ {
+		for j := i + 1; j < len(participator); j++ {
+			if (participator[i] == participator[j]) {
 				return false
 			}
 		}
@@ -220,13 +220,13 @@ func MeetingQuery(name, startDate, endDate string) []Meeting {
 	var ttt []Meeting
 	sd := stringToDate(startDate)
 	ed := stringToDate(endDate)
-	if (sd.isMoreThan(ed) || !isValid(sd) || !isValid(ed)) {
+	if (sd.isMoreThan(ed) || !sd.isValid() || !ed.isValid()) {
 		return ttt //此时a为空
 	}
 
 	filter := func(a *Meeting) bool {
 		if ((a.Sponsor == name || a.isParticipator(name)) &&
-		 (stringToDate(a.getEndDate()).GreaterOrEqual(sd)&&stringToDate(a.getStartDate()).SmallerOrEqual(sd)) {
+		 (stringToDate(a.getEndDate()).GreaterOrEqual(sd)&&stringToDate(a.getStartDate()).SmallerOrEqual(sd))) {
 			return true
 		}
 		if ((a.Sponsor == name || a.isParticipator(name)) && 
@@ -280,20 +280,25 @@ func ListAllParticipateMeetings(name string) []Meeting {
 * @param title meeting's title
 * @return if success, true will be returned
 */
-func DeleteMeeting(name, title string) []Meeting {
+func DeleteMeeting(name, title string) bool {
 	filter := func(a *Meeting) bool {
 		return a.Title == title && a.Sponsor == name
 	}
-	return deleteMeeting(filter)
+	return deleteMeeting(filter) > 0
 }
 /**
 * delete all meetings by sponsor
 * @param userName sponsor's username
 * @return if success, true will be returned
 */
-func DeleteAllMeetings(name string) []Meeting {
+func DeleteAllMeetings(name string) bool {
 	filter := func(a *Meeting) bool {
 		return  a.Sponsor == name
 	}
-	return deleteMeeting(filter)
+	return deleteMeeting(filter) > 0
+}
+
+func main() {
+	a := "0"
+	fmt.Println(a)
 }
