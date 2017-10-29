@@ -471,13 +471,26 @@ func Removeparticipator(title string, participator []string) bool {
 		}
 		mlist[0].Participators = mlist[0].Participators[:len(mlist[0].Participators)  - n]
 	}
+	/*----------------------7-----------------------*/
+
 	//重新写回meetinglist
 	for i, m := range meetinglist {
 		if m.Title ==  mlist[0].Title {
 			meetinglist[i] = mlist[0]
-			return true
 		}
 	}
+	
+	filter2 := func(m *Meeting) bool {
+		if len(m.Participators) == 0 {
+			return true
+		}
+		return false
+	}
+	if deleteMeeting(filter2) == 1 {
+		fmt.Println("该会议的参与者已清空，会议已删除")
+		return true
+	}
+
 	return true
 }
 
