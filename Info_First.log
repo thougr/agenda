@@ -91,3 +91,52 @@
 [Result]2017/10/29 01:23:17 MeetingQuery.go:40: Query meeting successfully
 [Execute]2017/10/29 01:23:42 root.go:40: [queryM -s 1000-12-12/12:12 -e 3999-12-12/12:12]
 [Result]2017/10/29 01:23:42 MeetingQuery.go:40: Query meeting successfully
+[Execute]2017/10/29 12:01:09 root.go:40: [create -t aaa -p 31 -p 123 -p 2 -s 1001-12-12/12:12 -e 1002-12-12/12:13]
+[Result]2017/10/29 12:01:09 MeetingCreate.go:45: Create meeting successfully
+[Execute]2017/10/29 12:01:39 root.go:40: [create -t 654 -p 31 -p 123 -p 2 -s 1003-12-12/12:12 -e 1004-12-12/12:13]
+[Result]2017/10/29 12:01:39 MeetingCreate.go:45: Create meeting successfully
+[Execute]2017/10/29 12:03:01 root.go:40: [add -p 2 -t qqqw]
+[Result]2017/10/29 12:03:01 AddParticipator.go:34: Fail,please log in
+[Result]2017/10/29 12:03:01 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:03:35 root.go:40: [add -p 2 -t qqqw]
+[Result]2017/10/29 12:03:35 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:18:28 root.go:40: [add -p 2 -t qqqw]
+[Result]2017/10/29 12:18:28 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:18:47 root.go:40: [add -p 2 -t qqqw1]
+[Result]2017/10/29 12:18:47 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:19:47 root.go:40: [add -p 2 -t qqqw1]
+[Result]2017/10/29 12:19:47 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:20:12 root.go:40: [add -p 2 -t qqqw1]
+[Result]2017/10/29 12:20:12 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:20:26 root.go:40: [add -p 3 -t qqqw]
+[Result]2017/10/29 12:20:26 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:24:37 root.go:40: [quit -t qqqw]
+[Result]2017/10/29 12:24:37 MeetingQuit.go:40: Quit meeting successfully
+[Execute]2017/10/29 12:26:12 root.go:40: [add -p 2 -t aa55]
+[Result]2017/10/29 12:26:12 AddParticipator.go:44: Fail to add participators
+[Execute]2017/10/29 12:27:05 root.go:40: [quit -t aa55]
+[Result]2017/10/29 12:27:05 MeetingQuit.go:43: Fail to quit meeting
+[Execute]2017/10/29 12:28:24 root.go:40: [quit -t aa55]
+[Result]2017/10/29 12:28:24 MeetingQuit.go:43: Fail to quit meeting
+[Execute]2017/10/29 13:04:17 root.go:40: [remove -p -t 654]
+[Result]2017/10/29 13:04:17 RemoveParticipator.go:44: Fail to remove participators
+[Execute]2017/10/29 13:04:44 root.go:40: [remove -p  -t 654]
+[Result]2017/10/29 13:04:44 RemoveParticipator.go:44: Fail to remove participators
+[Execute]2017/10/29 13:04:57 root.go:40: [remove -p 46546 -t 654]
+[Result]2017/10/29 13:04:57 RemoveParticipator.go:44: Fail to remove participators
+[Execute]2017/10/29 13:05:16 root.go:40: [remove -p 46546 -p 31 -p 2 -t 654]
+[Result]2017/10/29 13:05:16 RemoveParticipator.go:44: Fail to remove participators
+[Execute]2017/10/29 13:05:30 root.go:40: [remove -p 123 -p 31 -p 2 -p 543 -t 654]
+[Result]2017/10/29 13:05:30 RemoveParticipator.go:44: Fail to remove participators
+[Execute]2017/10/29 13:05:46 root.go:40: [remove -p 123 -p 2 -t 654]
+[Result]2017/10/29 13:05:46 RemoveParticipator.go:41: Remove participators successfully
+[Execute]2017/10/29 13:10:22 root.go:40: [remove -p 123 -p 2 -t 654]
+[Result]2017/10/29 13:10:22 RemoveParticipator.go:41: Remove participators successfully
+[Execute]2017/10/29 13:12:32 root.go:40: [remove -p 123 -p 2 -t 654]
+[Result]2017/10/29 13:12:32 RemoveParticipator.go:41: Remove participators successfully
+[Execute]2017/10/29 13:18:54 root.go:40: [remove -p 123 -p 2 -t 654]
+[Result]2017/10/29 13:18:54 RemoveParticipator.go:41: Remove participators successfully
+[Execute]2017/10/29 13:19:48 root.go:40: [remove -p 123 -p 2 -p 44 -t 654]
+[Result]2017/10/29 13:19:48 RemoveParticipator.go:44: Fail to remove participators
+[Execute]2017/10/29 13:20:16 root.go:40: [remove -p 3 -t 654]
+[Result]2017/10/29 13:20:16 RemoveParticipator.go:44: Fail to remove participators

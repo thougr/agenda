@@ -178,7 +178,7 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	}
 	ulist4 := queryMeeting(uf4)
 	if (len(ulist4) != 0) {
-		fmt.Println("与发起人其他会议冲突")
+		fmt.Println("与发起人或者参与者其他会议冲突")
 		return false
 	}
 	
@@ -209,7 +209,7 @@ func CreateMeeting(userName, title, startDate, endDate string, participator []st
 	for i := 0; i < len(participator); i++ {
 		for j := i + 1; j < len(participator); j++ {
 			if (participator[i] == participator[j]) {
-				fmt.Println("参与者不能重复的人")
+				fmt.Println("参与者不能重复")
 				return false
 			}
 		}
@@ -322,4 +322,163 @@ func DeleteAllMeetings(name string) bool {
 	}
 	return deleteMeeting(filter) > 0
 }
+
+/**
+* add participator into the meetings created by sponsor
+* @param title meeting's title
+* @return if success, true will be returned
+*/
+func Addparticipator(title string, participator []string) bool {
+	/*---------------------1------------------------*/
+	if len(participator) == 0 {
+		fmt.Println("必须至少添加一个参与者")
+		return false
+	} 
+	/*---------------------2------------------------*/
+	filter1 := func(m *Meeting) bool {
+		return  m.Sponsor == CurrentUser.Name && m.Title == title
+	}
+	//找到创建人的一条会议
+	mlist := queryMeeting(filter1)
+	if (len(mlist) == 0) {
+		fmt.Println("找不到当前用户创建的该会议")
+		return false
+	}
+	/*---------------------3------------------------*/
+	for i := 0; i < len(participator); i++ {
+		for j := i + 1; j < len(participator); j++ {
+			if (participator[i] == participator[j]) {
+				fmt.Println("添加的参与者不能重复")
+				return false
+			}
+		}
+	}
+	/*----------------------4-----------------------*/
+	for _, p := range mlist[0].Participators {
+		for _, pp := range participator{
+			if (pp == p) {
+				fmt.Println("存在添加的参与者已参与该会议")
+				return false
+			}
+		}
+	}
+	/*----------------------5-----------------------*/
+	for _, p := range participator {
+		if (CurrentUser.Name == p) {
+			fmt.Println("参与者不能有发起者")
+			return false
+		}
+	}
+	/*-------------------6--------------------------*/
+	sd := stringToDate(mlist[0].StartDate)
+	ed := stringToDate(mlist[0].EndDate)
+	filter2 := func(m *Meeting) bool {
+		for _, p := range participator {
+			if (!(p == m.getSponsor() || m.isParticipator(p))) {
+				return false
+			}
+			if ((p == m.getSponsor() || m.isParticipator(p)) &&
+				(sd.GreaterOrEqual(stringToDate(m.getEndDate())) ||
+				ed.SmallerOrEqual(stringToDate(m.getStartDate())))) {
+				return false
+			} else {
+				return true
+			}
+		}
+		return true
+	}
+	mlist1 := queryMeeting(filter2)
+	if (len(mlist1) != 0) {
+		fmt.Println("添加的参与者与其他会议冲突")
+		return false
+	}
+	
+	/*-------------------7--------------------------*/
+	filter3 := func(m *Meeting) bool {
+		for _, p := range participator {
+			if (!(p == m.getSponsor() || m.isParticipator(p))) {
+				return false
+			}
+			if ((p == m.getSponsor() || m.isParticipator(p)) &&
+				(sd.GreaterOrEqual(stringToDate(m.getEndDate())) ||
+				ed.SmallerOrEqual(stringToDate(m.getStartDate())))) {
+				return false
+			} else {
+				return true
+			}
+		}
+		return true
+	}
+
+	mlist2 := queryMeeting(filter3)
+	if (len(mlist2) != 0) {
+		fmt.Println("添加的参与者与其他会议冲突")
+		return false
+	}
+	
+	return true
+}
+
+/**
+* remove participator from the meetings created by sponsor
+* @param title meeting's title
+* @return if success, true will be returned
+*/
+func Removeparticipator(title string, participator []string) bool {
+	/*---------------------1------------------------*/
+	if len(participator) == 0 {
+		fmt.Println("必须至少删除一个参与者")
+		return false
+	} 
+	/*---------------------2------------------------*/
+	filter1 := func(m *Meeting) bool {
+		return  m.Sponsor == CurrentUser.Name && m.Title == title
+	}
+	//找到创建人的一条会议
+	mlist := queryMeeting(filter1)
+	if (len(mlist) == 0) {
+		fmt.Println("找不到当前用户创建的该会议")
+		return false
+	}
+	/*----------------------3-----------------------*/
+	for _, p := range participator {
+		if (CurrentUser.Name == p) {
+			fmt.Println("不能删除发起者,你可以退出会议（quit）")
+			return false
+		}
+	}
+	/*----------------------4-----------------------*/
+	if (len(participator) > len(mlist[0].Participators)) {
+		fmt.Println("删除人数不能大于原有人数")
+		return false
+	}
+	/*----------------------5-----------------------*/
+	for _, p := range participator {
+		if (mlist[0].isParticipator(p) == false) {
+			fmt.Println("存在待删除者没有参与该会议")
+			return false
+		}	
+	}
+	/*----------------------6-----------------------*/
+	//delete
+	for _, p := range participator {
+		n := 0
+		for i, pp := range mlist[0].Participators {
+			if p == pp {
+				mlist[0].Participators[i] = mlist[0].Participators[len(mlist[0].Participators) - 1 - n]			
+				n++
+			}
+		}
+		mlist[0].Participators = mlist[0].Participators[:len(mlist[0].Participators)  - n]
+	}
+	//重新写回meetinglist
+	for i, m := range meetinglist {
+		if m.Title ==  mlist[0].Title {
+			meetinglist[i] = mlist[0]
+			return true
+		}
+	}
+	return true
+}
+
 

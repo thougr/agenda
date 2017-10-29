@@ -201,7 +201,7 @@ Global Flags:
 You can query all the meeting have attended during [StartTime] and [EndTime]
 
 Usage:
-  agenda queryM -s [StartTime] -e [EndTime] [flags]
+  agenda queryM -t [StartTime] -e [EndTime] [flags]
 
 Flags:
   -h, --help   help for queryM
