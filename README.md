@@ -67,6 +67,7 @@ Register new user successfully
 ```
 Register new user successfully
 ```
+</br>
 
 **2.测试login**：</br>
 登录Alice</br>
@@ -264,7 +265,7 @@ remove 用法:
 ```
  ./agenda remove -p [Participator] -t [Title]
 ```
-###移出Cobra：
+移出Cobra：
 ```
  ./agenda remove -p Cobra -t Alice_Bob
 Remove participators successfully
