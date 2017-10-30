@@ -16,7 +16,9 @@ package cmd
 
 import (
 	"fmt"
-
+	"log"
+	"os"
+  	"agenda/entity"
 	"github.com/spf13/cobra"
 )
 
@@ -28,14 +30,36 @@ var UserLoginCmd = &cobra.Command{
 
 attention:If the PassWord is right,you can login Agenda and use it
 If forget the PassWord,you must register another one User`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		debugLog := log.New(logFile,"[Execute]", log.Ldate|log.Ltime|log.Lshortfile)
+		debugLog.Printf("%v\n", os.Args[1:])
+	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("UserLogin called")
+		entity.ReadCurrentUser()
+		entity.ReadFromFile()
+		arg_u, _ := cmd.Flags().GetString("username")
+		arg_p, _ := cmd.Flags().GetString("password")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.UserLogIn(arg_u, arg_p) {
+  
+			debugLog.Println("Log in successfully")
+			fmt.Println("Log in successfully")
+		} else {
+		  debugLog.Println("Fail to log in")
+		  fmt.Println("Fail to log in")
+		}
+		  entity.QuitAgenda()
+	  },
+
+	PostRun: func(cmd *cobra.Command, args []string) {
+		logFile.Sync()
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(UserLoginCmd)
-
+	UserLoginCmd.Flags().StringP("username", "u", "", "new user's username")
+	UserLoginCmd.Flags().StringP("password", "p", "", "new user's password")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

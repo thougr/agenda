@@ -16,7 +16,8 @@ package cmd
 
 import (
 	"fmt"
-
+	"log"
+    "agenda/entity"
 	"github.com/spf13/cobra"
 )
 
@@ -27,14 +28,30 @@ var AddParticipatorCmd = &cobra.Command{
 	Long: `Add [Participator] to the meeting with the title of [Title]:
 
 attention:If the Participator cannot attend during the time, add fail.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("AddParticipator called")
-	},
+Run: func(cmd *cobra.Command, args []string) {
+	debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+	if entity.StartAgenda() == false {
+		debugLog.Println("Fail,please log in")
+		fmt.Println("Fail,please log in")
+	}
+	
+	arg_p, _ := cmd.Flags().GetStringSlice("Participator")
+	arg_t, _ := cmd.Flags().GetString("Title")
+	if entity.Addparticipator(arg_t, arg_p) {
+		debugLog.Println("Add participators successfully")
+		fmt.Println("Add participators successfully")
+	} else {
+		debugLog.Println("Fail to add participators")
+		fmt.Println("Fail to add participators")
+	}
+	entity.QuitAgenda()
+  },
 }
 
 func init() {
 	RootCmd.AddCommand(AddParticipatorCmd)
-
+	AddParticipatorCmd.Flags().StringSliceP("Participator", "p", []string{}, "meeting's participator")
+	AddParticipatorCmd.Flags().StringP("Title", "t", "", "meeting title")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

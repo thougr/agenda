@@ -15,8 +15,9 @@
 package cmd
 
 import (
+	"agenda/entity"
 	"fmt"
-
+	"log"
 	"github.com/spf13/cobra"
 )
 
@@ -28,13 +29,28 @@ var MeetingQuitCmd = &cobra.Command{
 
 attention:if there is no participators in this meeting,the meeting will be deleted`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("MeetingQuit called")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.StartAgenda() == false {
+			debugLog.Println("Fail, please log in")
+			fmt.Println("Fail, please log in")
+		}
+		arg_t, _ := cmd.Flags().GetString("Title")
+
+		if entity.QuitMeeting(arg_t) {
+			debugLog.Println("Quit meeting successfully")
+			fmt.Println("Quit meeting successfully")
+		} else {
+			debugLog.Println("Fail to quit meeting")
+			fmt.Println("不存在该会议或者该会议不是本用户创建")
+			fmt.Println("Fail to quit meeting")
+		}
+		entity.QuitAgenda()
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(MeetingQuitCmd)
-
+	MeetingQuitCmd.Flags().StringP("Title", "t", "", "meeting title")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

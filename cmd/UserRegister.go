@@ -17,7 +17,6 @@ package cmd
 import (
 	"fmt"
 	"log"
-	"os"
   "agenda/entity"
 	"github.com/spf13/cobra"
 )
@@ -35,12 +34,8 @@ var UserRegisterCmd = &cobra.Command{
 [PassWord] is the password to login
 [Email]is the email address of the register
 [Phone] is the phone of the register`,
-	PreRun: func(cmd *cobra.Command, args []string) {
-	  debugLog := log.New(logFile,"[Execute]", log.Ldate|log.Ltime|log.Lshortfile)
-    debugLog.Printf("Register : %v\n", os.Args[1:])
-  },
 	Run: func(cmd *cobra.Command, args []string) {
-	  entity.StartAgenda()
+	  entity.ReadFromFile()
 	  arg_u, _ := cmd.Flags().GetString("username")
 	  arg_p, _ := cmd.Flags().GetString("password")
 	  arg_e, _ := cmd.Flags().GetString("email")
@@ -56,9 +51,6 @@ var UserRegisterCmd = &cobra.Command{
 	  }
 		entity.QuitAgenda()
 	},
-  PostRun: func(cmd *cobra.Command, args []string) {
-     logFile.Sync()
-  },
 }
 
 func init() {

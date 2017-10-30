@@ -15,9 +15,10 @@
 package cmd
 
 import (
-  "log"
-	"github.com/spf13/cobra"
+	"agenda/entity"
 	"fmt"
+	"log"
+	"github.com/spf13/cobra"
 )
 
 // MeetingsClearCmd represents the MeetingsClear command
@@ -25,19 +26,23 @@ var MeetingsClearCmd = &cobra.Command{
 	Use:   "clear",
 	Short: "clear all the meeting created by the current user",
 	Long: `you can clear all the meeting you have created`,
-	PreRun: func(cmd *cobra.Command, args []string) {
-	  
-    debugLog := log.New(logFile,"[Execute]", log.Ldate|log.Ltime|log.Lshortfile)
-    debugLog.Printf("MeetingsClear : %v\n", args)
-  },
 	Run: func(cmd *cobra.Command, args []string) {
-	  fmt.Println("MeetingsClear called")
-	  debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
-		debugLog.Println("MeetingsClear called")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.StartAgenda() == false {
+			debugLog.Println("Fail, please log in")
+			fmt.Println("Fail, please log in")
+		}
+
+		if entity.DeleteAllMeetings(entity.CurrentUser.Name) {
+			debugLog.Println("Clear meeting successfully")
+			fmt.Println("Clear meeting successfully")
+			
+		} else {
+			debugLog.Println("Fail to clear meeting")
+			fmt.Println("Fail to clear meeting")
+		}
+		entity.QuitAgenda()
 	},
-  PostRun: func(cmd *cobra.Command, args []string) {
-     logFile.Sync()
-  },
 }
 
 func init() {

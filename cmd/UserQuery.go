@@ -15,8 +15,9 @@
 package cmd
 
 import (
+	"agenda/entity"
 	"fmt"
-
+	"log"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +27,17 @@ var UserQueryCmd = &cobra.Command{
 	Short: "To query all the users' names",
 	Long: `You can query all the users's names who have registed.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("UserQuery called")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.StartAgenda() == false {
+			debugLog.Println("Fail, please log in")
+			fmt.Println("Fail, please log in\n")
+		}
+		uu := entity.ListAllUsers()
+		fmt.Println("Name Email Telephone")
+		for i, u := range uu {
+			fmt.Printf("%d. %s %s %s\n", i+1, u.Name, u.Email, u.Phone)
+		}
+		entity.QuitAgenda()
 	},
 }
 

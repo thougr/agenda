@@ -15,8 +15,9 @@
 package cmd
 
 import (
+	"agenda/entity"
 	"fmt"
-
+	"log"
 	"github.com/spf13/cobra"
 )
 
@@ -27,9 +28,22 @@ var UserDeleteCmd = &cobra.Command{
 	Long: `you can delete your account in the database of Agenda:
 
 attention:After deleting,you will need to register a new User to login Agenda.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("UserDelete called")
-	},
+Run: func(cmd *cobra.Command, args []string) {
+	debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+	if entity.StartAgenda() == false {
+		debugLog.Println("Fail, please log in")
+		fmt.Println("Fail, please log in")
+	}
+
+	if entity.DeleteUser(entity.CurrentUser.Name, entity.CurrentUser.Password) {
+		debugLog.Println("Delete this account successfully")
+		fmt.Println("Delete this account successfully")
+	} else {
+		debugLog.Println("Fail to delete this account")
+		fmt.Println("Fail to delete this account")
+	}
+	entity.QuitAgenda()
+},
 }
 
 func init() {

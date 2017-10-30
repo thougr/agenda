@@ -15,8 +15,9 @@
 package cmd
 
 import (
+	"agenda/entity"
 	"fmt"
-
+	"log"
 	"github.com/spf13/cobra"
 )
 
@@ -31,13 +32,32 @@ var MeetingCreateCmd = &cobra.Command{
 [StartTime] the StartTime of the meeting
 [EndTime] the EndTime of the meeting`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("MeetingCreate called")
+		debugLog := log.New(logFile,"[Result]", log.Ldate|log.Ltime|log.Lshortfile)
+		if entity.StartAgenda() == false {
+			debugLog.Println("Fail, please log in")
+			fmt.Println("Fail, please log in")
+		}
+		arg_t, _ := cmd.Flags().GetString("Title")
+		arg_p, _ := cmd.Flags().GetStringSlice("Participator")
+		arg_s, _ := cmd.Flags().GetString("StartTime")
+		arg_e, _ := cmd.Flags().GetString("EndTime")
+		if entity.CreateMeeting(entity.CurrentUser.Name, arg_t, arg_s, arg_e, arg_p) {
+			debugLog.Println("Create meeting successfully")
+			fmt.Println("Create meeting successfully")
+		} else {
+			debugLog.Println("Fail to create meeting")
+			fmt.Println("Fail to create meeting")
+		}
+		entity.QuitAgenda()
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(MeetingCreateCmd)
-
+	MeetingCreateCmd.Flags().StringP("Title", "t", "", "meeting title")
+	MeetingCreateCmd.Flags().StringSliceP("Participator", "p", []string{}, "meeting's participator")
+	MeetingCreateCmd.Flags().StringP("StartTime", "s", "", "meeting's startTime")
+	MeetingCreateCmd.Flags().StringP("EndTime", "e", "", "meeting's endTime")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
