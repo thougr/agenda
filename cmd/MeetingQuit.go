@@ -36,7 +36,7 @@ attention:if there is no participators in this meeting,the meeting will be delet
 		}
 		arg_t, _ := cmd.Flags().GetString("Title")
 
-		if entity.DeleteMeeting(entity.CurrentUser.Name, arg_t) {
+		if entity.QuitMeeting(arg_t) {
 			debugLog.Println("Quit meeting successfully")
 			fmt.Println("Quit meeting successfully")
 		} else {

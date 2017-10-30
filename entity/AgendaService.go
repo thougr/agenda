@@ -409,11 +409,22 @@ func Addparticipator(title string, participator []string) bool {
 		}
 		return true
 	}
-
 	mlist2 := queryMeeting(filter3)
 	if (len(mlist2) != 0) {
 		fmt.Println("添加的参与者与其他会议冲突")
 		return false
+	}
+	/*---------------------------------------------*/
+	//add
+	for _, p := range participator {
+		mlist[0].Participators = append(mlist[0].Participators, p)
+	}
+
+	//写回原会议
+	for i, m := range meetinglist {
+		if m.Title ==  mlist[0].Title {
+			meetinglist[i] = mlist[0]
+		}
 	}
 	
 	return true
@@ -471,6 +482,65 @@ func Removeparticipator(title string, participator []string) bool {
 		}
 		mlist[0].Participators = mlist[0].Participators[:len(mlist[0].Participators)  - n]
 	}
+	/*----------------------7-----------------------*/
+
+	//重新写回meetinglist
+	for i, m := range meetinglist {
+		if m.Title ==  mlist[0].Title {
+			meetinglist[i] = mlist[0]
+		}
+	}
+	
+	filter2 := func(m *Meeting) bool {
+		if len(m.Participators) == 0 {
+			return true
+		}
+		return false
+	}
+	if deleteMeeting(filter2) == 1 {
+		fmt.Println("该会议的参与者已清空，会议已删除")
+		return true
+	}
+
+	return true
+}
+
+
+/**
+* CurrentUser quits meeting in which the currentUser participate 
+* @param title meeting's title
+* @return if success, true will be returned
+*/
+func QuitMeeting(title string) bool {
+	/*---------------------1------------------------*/
+	filter1 := func(m *Meeting) bool {
+		return  (m.Sponsor == CurrentUser.Name ||  m.isParticipator(CurrentUser.Name))&& m.Title == title
+	}
+	//找到当前用户参加的一条会议，当前用户为参与者或发起者
+	mlist := queryMeeting(filter1)
+	if (len(mlist) == 0) {
+		fmt.Println("找不到当前用户参加的该会议")
+		return false
+	}
+	/*----------------------2-----------------------*/
+	//当前用户为该会议的发起者，则删除该会议
+	if (CurrentUser.Name == mlist[0].Sponsor) {
+		if DeleteMeeting(CurrentUser.Name, title) {
+			fmt.Println("当前用户为该会议的发起者，该会议已被删除")
+			return true
+		}
+	}
+	
+	/*----------------------3-----------------------*/
+	//delete
+	n := 0
+	for i, pp := range mlist[0].Participators {
+		if CurrentUser.Name == pp {
+			mlist[0].Participators[i] = mlist[0].Participators[len(mlist[0].Participators) - 1 - n]			
+			n++
+		}
+	}
+	mlist[0].Participators = mlist[0].Participators[:len(mlist[0].Participators)  - n]
 	/*----------------------7-----------------------*/
 
 	//重新写回meetinglist

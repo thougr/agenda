@@ -35,11 +35,11 @@ var MeetingDeleteCmd = &cobra.Command{
 		arg_t, _ := cmd.Flags().GetString("Title")
 
 		if entity.DeleteMeeting(entity.CurrentUser.Name, arg_t) {
-			debugLog.Println("Delete meeting successfully")
-			fmt.Println("Delete meeting successfully")
+			debugLog.Println("Cancel meeting successfully")
+			fmt.Println("Cancel meeting successfully")
 		} else {
-			debugLog.Println("Fail to delete meeting")
-			fmt.Println("Fail to delete meeting")
+			debugLog.Println("Fail to Cancel meeting")
+			fmt.Println("Fail to Cancel meeting")
 		}
 		entity.QuitAgenda()
 	},

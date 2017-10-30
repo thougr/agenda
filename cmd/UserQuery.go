@@ -33,9 +33,9 @@ var UserQueryCmd = &cobra.Command{
 			fmt.Println("Fail, please log in\n")
 		}
 		uu := entity.ListAllUsers()
-		fmt.Println("Name Password Email Telephone")
+		fmt.Println("Name Email Telephone")
 		for i, u := range uu {
-			fmt.Printf("%d. %s\n", i+1, u)
+			fmt.Printf("%d. %s %s %s\n", i+1, u.Name, u.Email, u.Phone)
 		}
 		entity.QuitAgenda()
 	},
