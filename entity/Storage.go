@@ -91,7 +91,7 @@ func writeCurrentUser()  {
 }
 func createUser(t_user User) {
 	userlist = append(userlist,t_user)
-	fmt.Printf("userlist: %v\n", userlist)
+	
 }
 func createMeeting(t_meeting Meeting) {
 	meetinglist = append(meetinglist,t_meeting)
