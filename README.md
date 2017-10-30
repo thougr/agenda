@@ -63,13 +63,13 @@ Register new user successfully
 ./agenda register -u Cobra -p Cobra -e Cobra@163.com -t 123456
 Register new user successfully
 ```
-###注册成功:
+注册成功:
 ```
 Register new user successfully
 ```
 
-##**2.测试login**：
-###登录Alice
+**2.测试login**：</br>
+登录Alice</br>
 用法：
 
 ```
@@ -84,8 +84,8 @@ Register new user successfully
 ```
 Log in successfully
 ```
-##**3.测试queryU**：
-###用Alice的账号查询其他两位用户的信息
+**3.测试queryU**：</br>
+用Alice的账号查询其他两位用户的信息</br>
 用法：
 
 ```
@@ -100,11 +100,11 @@ Log in successfully
 ```
 （只能查到名字、邮箱、电话，而不能查询密码）
 
-##**4.测试create**：
-###用Alice的账号创建两个会议：
-####Alice_Bob:    2000-01-01/00:00  2001-01-01/00:00
-####Alice_Cobra:2002-01-01/00:00  2003-01-01/00:00
-用法：
+**4.测试create**：</br>
+用Alice的账号创建两个会议：</br>
+Alice_Bob:    2000-01-01/00:00  2001-01-01/00:00</br>
+Alice_Cobra:2002-01-01/00:00  2003-01-01/00:00</br>
+用法：</br>
 ```
  ./agenda create -t Alice_Bob -p Bob -s 2000-01-01/00:00 -e 2001-01-01/00:00
 Create meeting successfully
@@ -114,8 +114,8 @@ Create meeting successfully
 ```
 创建成功。
 
-##**5.测试queryM**:
-###用Alice的账号查询她参加的所有会议
+**5.测试queryM**:</br>
+用Alice的账号查询她参加的所有会议</br>
 用法：
 ```
  ./agenda queryM -s [StartTime] -e [EndTime]
@@ -143,8 +143,8 @@ Sponsor Title StartDate EndDate Participators
 与发起人或者参与者其他会议冲突
 Fail to create meeting
 ```
-##**6.测试deleteM**:
-###用Alice的账号删除Alice_Cobra会议
+**6.测试deleteM**:</br>
+用Alice的账号删除Alice_Cobra会议</br>
 用法：
 
 ```
@@ -166,11 +166,11 @@ Query meeting successfully
 Sponsor Title StartDate EndDate Participators
 1. {Alice Alice_Bob 2000-01-01/00:00 2001-01-01/00:00 [Bob]}
 ```
-###删除会议成功。
+删除会议成功。
 
 
-##**7.测试delete**：
-###登出Alice，登入Cobra,测试delete:
+**7.测试delete**：</br>
+登出Alice，登入Cobra,测试delete:</br>
 ```
 ./agenda logout
 Log out successfully
@@ -183,7 +183,7 @@ Log in successfully
 ./agenda delete
 Delete this account successfully
 ```
-###再次登入Alice查询用户结果：
+再次登入Alice查询用户结果：
 ```
 ./agenda login -u Alice -p Alice
 Log in successfully
@@ -194,10 +194,10 @@ Name  Email Telephone
 1. Alice Alice@163.com 123456
 2. Bob Bob@163.com 123456
 ```
-###Cobra注销成功。
+Cobra注销成功。</br>
 
-##**8.测试add**：
-###重新注册Cobra，登入Alice，添加Cobra为会议Alice_Bob参与者：
+**8.测试add**：</br>
+重新注册Cobra，登入Alice，添加Cobra为会议Alice_Bob参与者：</br>
 
 ```
  ./agenda add -p Cobra -t Alice_Bob
@@ -211,10 +211,10 @@ Sponsor Title StartDate EndDate Participators
 1. {Alice Alice_Bob 2000-02-02/00:00 2001-02-02/00:00 [Bob Cobra]}
 
 ```
-###Cobra加入成功。
+Cobra加入成功。
 
-##**9.测试quit**：
-###登入Bob，使用quit推出Alice_Bob会议：
+**9.测试quit**：</br>
+登入Bob，使用quit推出Alice_Bob会议：</br>
 用法：
 
 ```
@@ -229,7 +229,7 @@ Log in successfully
 Quit meeting successfully
 
 ```
-###登入Alice查看会议的参加人员：
+登入Alice查看会议的参加人员：</br>
 
 ```
 ./agenda logout
@@ -245,10 +245,10 @@ Sponsor Title StartDate EndDate Participators
 1. {Alice Alice_Bob 2000-02-02/00:00 2001-02-02/00:00 [Cobra]}
 
 ```
-###Bob退出会议成功。
+Bob退出会议成功。
 
-##**10.测试remove**：
-###再次把Bob加入Alice_Bob会议中:
+**10.测试remove**：</br>
+再次把Bob加入Alice_Bob会议中:</br>
 
 ```
 ./agenda add -p Bob -t Alice_Bob
@@ -277,17 +277,17 @@ Sponsor Title StartDate EndDate Participators
 1. {Alice Alice_Bob 2000-02-02/00:00 2001-02-02/00:00 [Bob]}
 
 ```
-###Cobra成功退出Alice_Bob会议。
+Cobra成功退出Alice_Bob会议。
 
-##**11.测试clear**：
-###登入Bob建立会议Bob_Alice会议：
+**11.测试clear**：</br>
+登入Bob建立会议Bob_Alice会议：</br>
 
 ```
  ./agenda login -u Bob -p Bob
 Log in successfully
  ./agenda create -t Bob_Alice -p Alice -s 2002-02-02/00:00 -e 2003-02-02/00:00
 ```
-###登录Alice查看会议：
+登录Alice查看会议：
 ```
 ./agenda logout
 Log out successfully
@@ -302,7 +302,7 @@ Sponsor Title StartDate EndDate Participators
 1. {Alice Alice_Bob 2000-02-02/00:00 2001-02-02/00:00 [Bob]}
 2. {Bob Bob_Alice 2002-02-02/00:00 2003-02-02/00:00 [Alice]}
 ```
-###使用clear：
+使用clear：
 ```
 ./agenda clear
 Clear meeting successfully
@@ -312,4 +312,4 @@ Query meeting successfully
 Sponsor Title StartDate EndDate Participators
 1. {Bob Bob_Alice 2002-02-02/00:00 2003-02-02/00:00 [Alice]}
 ```
-###清空发起会议成功。
+清空发起会议成功。
