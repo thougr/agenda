@@ -167,3 +167,33 @@
 [Execute]2017/10/29 22:53:04 root.go:40: [login -u 2 -p 456]
 [Execute]2017/10/29 22:53:04 UserLogin.go:35: [login -u 2 -p 456]
 [Result]2017/10/29 22:53:04 UserLogin.go:45: Log in successfully
+[Execute]2017/10/30 21:02:25 root.go:40: [register 123 123]
+[Result]2017/10/30 21:02:25 UserRegister.go:46: Register new user successfully
+[Execute]2017/10/30 21:03:12 root.go:40: [register 123 123 56 56]
+[Result]2017/10/30 21:03:12 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:03:24 root.go:40: [register 123４ 123 56 56]
+[Result]2017/10/30 21:03:24 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:03:38 root.go:40: [register 1234 123 56 56]
+[Result]2017/10/30 21:03:38 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:03:44 root.go:40: [register 1234 123 56 56]
+[Result]2017/10/30 21:03:44 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:03:56 root.go:40: [register 1234 1234 56 56]
+[Result]2017/10/30 21:03:56 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:04:03 root.go:40: [register 12345 1234 56 56]
+[Result]2017/10/30 21:04:03 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:04:38 root.go:40: [register u 12345 p 1234 e 56 t 56]
+[Result]2017/10/30 21:04:38 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:04:55 root.go:40: [register u 12323 p 1234 e 56 t 56]
+[Result]2017/10/30 21:04:55 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:07:07 root.go:40: [register u 12323 p 1234 e 56 t 56]
+[Result]2017/10/30 21:07:07 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:07:18 root.go:40: [register u asdasd p 1234 e 56 t 56]
+[Result]2017/10/30 21:07:18 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:07:48 root.go:40: [register u asdasd p 1234 e 56 t 56]
+[Result]2017/10/30 21:07:48 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:08:13 root.go:40: [register u asdasd p 1234 e 56 t 56]
+[Result]2017/10/30 21:08:13 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:08:57 root.go:40: [register u asdasd p 1234 e 56 t 56]
+[Result]2017/10/30 21:08:57 UserRegister.go:49: Fail to register new user
+[Execute]2017/10/30 21:09:54 root.go:40: [register -u asdasd -p 1234 -e 56 -t 56]
+[Result]2017/10/30 21:09:54 UserRegister.go:46: Register new user successfully
