@@ -4,7 +4,7 @@
 
 
 -------------------
-##**agenda界面**：
+**agenda界面**：
 
 ```
  ./agenda
@@ -44,8 +44,8 @@ Use "agenda [command] --help" for more information about a command.
 
 ```
 
-##**1.测试register**：
-###创建三个用户：Alice、Bob、Cobra
+**1.测试register**：</br>
+创建三个用户：Alice、Bob、Cobra
 
 ```
 ./agenda register -u [UserName] -p [Pass] -e [Email] -t [Phone] 
